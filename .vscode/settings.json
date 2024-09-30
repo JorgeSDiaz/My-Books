@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "health",
-        "get"
+        "get",
+        "docker"
     ]
 }

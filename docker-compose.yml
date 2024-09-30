@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: mybooks
+    volumes:
+      - db-migrations:/migrations
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+      dockerfile: ./dockerfile
+    volumes:
+      - ./:/app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  db-migrations:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/jsaenz/Projects/My-Books/db-migrations
